@@ -17,6 +17,9 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
+        stage('Manual Approval'){
+            input "Lanjutkan ke tahap Deploy?"
+        }
         stage('Deploy') {
             steps {
                 sh "chmod +x -R ${env.WORKSPACE}"

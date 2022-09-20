@@ -17,5 +17,13 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './jenkins/scripts/deliver.sh'
+                input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
     }
 }
